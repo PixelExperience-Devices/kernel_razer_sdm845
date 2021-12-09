@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Razer Inc. All rights reserved.
+ * Copyright (c) 2018, Razer, Inc. All rights reserved.
  * Copyright (c) 2015, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -13,9 +13,9 @@
  */
 
 &mdss_mdp {
-	dsi_nt36830_wqhd_dualdsi_extclk_cmd: qcom,mdss_dsi_nt36830_wqhd_dualdsi_extclk_cmd {
+	dsi_nt36830_wqhd_dualdsi_cmd: qcom,mdss_dsi_nt36830_wqhd_dualdsi_cmd {
 		qcom,mdss-dsi-panel-name =
-			"NT36830 dual dsi extclk cmd mode panel with DSC";
+			"NT36830 dual dsi cmd mode panel with DSC";
 		qcom,mdss-dsi-panel-type = "dsi_cmd_mode";
 		qcom,mdss-dsi-virtual-channel-id = <0>;
 		qcom,mdss-dsi-stream = <0>;
@@ -103,7 +103,7 @@
 					15 01 00 00 00 00 02 e1 00
 					15 01 00 00 00 00 02 e5 01
 					15 01 00 00 00 00 02 bb 10
-					15 01 00 00 00 00 02 f6 71
+					15 01 00 00 00 00 02 f6 70
 					15 01 00 00 00 00 02 f7 80
 					39 01 00 00 00 00 05 be 00 10 00 10
 					15 01 00 00 00 00 02 35 00
@@ -326,7 +326,7 @@
 					15 01 00 00 00 00 02 e1 00
 					15 01 00 00 00 00 02 e5 01
 					15 01 00 00 00 00 02 bb 10
-					15 01 00 00 00 00 02 f6 71
+					15 01 00 00 00 00 02 f6 70
 					15 01 00 00 00 00 02 f7 80
 					39 01 00 00 00 00 05 be 00 10 00 10
 					15 01 00 00 00 00 02 35 00
