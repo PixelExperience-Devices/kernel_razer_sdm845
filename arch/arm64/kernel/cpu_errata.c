@@ -865,6 +865,11 @@ static void kvm_setup_bhb_slot(const char *hyp_vecs_start) { };
 
 static bool is_spectrev2_safe(void)
 {
+	static const struct midr_range arm64_psci_bp_harden_cpus[] = {
+		MIDR_ALL_VERSIONS(MIDR_KRYO3G),
+		MIDR_ALL_VERSIONS(MIDR_KRYO2XX_GOLD),
+		{},
+	};
 	return !is_midr_in_range_list(read_cpuid_id(),
 					arm64_psci_bp_harden_cpus) &&
 		!is_midr_in_range_list(read_cpuid_id(),
