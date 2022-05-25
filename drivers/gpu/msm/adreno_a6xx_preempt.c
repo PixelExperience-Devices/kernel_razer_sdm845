@@ -543,7 +543,6 @@ unsigned int a6xx_preemption_pre_ibsubmit(
 			rb->perfcounter_save_restore_desc.gpuaddr);
 
 	if (context) {
-		struct kgsl_device *device = KGSL_DEVICE(adreno_dev);
 		struct adreno_context *drawctxt = ADRENO_CONTEXT(context);
 		struct adreno_ringbuffer *rb = drawctxt->rb;
 		uint64_t dest = PREEMPT_SCRATCH_ADDR(adreno_dev, rb->id);
@@ -806,17 +805,28 @@ int a6xx_preemption_init(struct adreno_device *adreno_dev)
 
 		postamble[count++] = cp_type7_packet(CP_WAIT_REG_MEM, 6);
 		postamble[count++] = 0x3;
-		postamble[count++] = A6XX_RBBM_PERFCTR_SRAM_INIT_STATUS;
-		postamble[count++] = 0x0;
-		postamble[count++] = 0x1;
-		postamble[count++] = 0x1;
-		postamble[count++] = 0x0;
+		postamble[count++] = A6XX_RBBM_PERFCTR_SRAM_INIT_STATUS;/*
+ * The CPU Errata work arounds are detected and applied at boot time
+ * and the related information is freed soon after. If the new CPU requires
+ * an errata not detected at boot, fail this CPU.
+ */
+static void verify_local_cpu_errata_workarounds(void)
+{
+	const struct arm64_cpu_capabilities *caps = arm64_errata;
 
-		preempt->postamble_len = count;
+	for (; caps->matches; caps++) {
+		if (cpus_have_cap(caps->capability)) {
+			if (caps->cpu_enable)
+				caps->cpu_enable(caps);
+		} else if (caps->matches(caps, SCOPE_LOCAL_CPU)) {
+			pr_crit("CPU%d: Requires work around for %s, not detected"
+					" at boot time\n",
+				smp_processor_id(),
+				caps->desc ? : "an erratum");
+			cpu_die_early();
+		}
 	}
-
-	ret = a6xx_preemption_iommu_init(adreno_dev);
-
+}
 err:
 	if (ret)
 		a6xx_preemption_close(device);
