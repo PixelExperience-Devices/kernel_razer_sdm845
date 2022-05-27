@@ -4,22 +4,22 @@ qcom,2930572_fih_rcl_4000mah_averaged_masterslave_feb9th2018 {
 	/* #2930572_FIH_RCL_4000mAh_averaged_MasterSlave_Feb9th2018*/
 	qcom,max-voltage-uv = <4400000>;
 	qcom,nom-batt-capacity-mah = <4000>;
-	qcom,fastchg-current-ma = <3900>;
+	qcom,fastchg-current-ma = <2400>;
 	qcom,batt-id-kohm = <240>;
 	qcom,battery-beta = <4085>;
 	qcom,fg-cc-cv-threshold-mv = <4390>;
 	qcom,battery-type = "2930572_fih_rcl_4000mah_averaged_masterslave_feb9th2018";
 	qcom,soc-based-step-chg;
-	qcom,step-chg-ranges = <0	25	3900000
+	qcom,step-chg-ranges = <0	25	2400000
 				26	100	1900000>;
 	fih,step-chg-hysteresis = <0>;
 	qcom,jeita-fcc-ranges = <0	159	750000
-				 160	449	3900000
+				 160	449	2400000
 				 450	549	1900000>;
 	qcom,jeita-fv-ranges = <0	440	4400000
 				441	550	4100000>;
 	fih,jeita-hysteresis = <9>;
-	fih,wlc-fcc-ranges = <0	349	3900000
+	fih,wlc-fcc-ranges = <0	349	2400000
 				 350	379	1250000
 				 380	409	700000
 				 410	549	400000>;
